@@ -26,7 +26,7 @@ export default function Home() {
       
       
       {/* Footer Section */}
-      <footer id="contact" className="relative min-h-screen flex items-center py-24 md:py-40 px-6 md:px-24 bg-black text-white font-serif snap-start">
+      <footer id="contact" className="relative min-h-[70vh] md:min-h-screen flex items-center py-24 md:py-40 px-6 md:px-24 bg-black text-white font-serif snap-start">
         <div className="max-w-7xl mx-auto text-center flex flex-col items-center gap-12">
           <h2 className="text-5xl md:text-8xl font-sans font-bold tracking-tighter uppercase">LET'S CREATE</h2>
           <p className="text-xl md:text-2xl text-white/70 max-w-2xl">

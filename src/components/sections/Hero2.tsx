@@ -35,7 +35,7 @@ function HeadlineWithGif() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="text-[clamp(8rem,22vw,18rem)] leading-[0.82] font-sans font-black uppercase tracking-[-0.05em] text-white whitespace-nowrap"
+          className="text-[clamp(3.5rem,20vw,18rem)] leading-[0.82] font-sans font-black uppercase tracking-[-0.05em] text-white whitespace-nowrap"
         >
           <span ref={firstLetterRef}>T</span>
           <span>anvir</span>
@@ -65,10 +65,10 @@ export const Hero2 = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   return (
-    <section id="hero2" className="relative min-h-screen bg-black text-white overflow-hidden snap-start">
+    <section id="hero2" className="relative min-h-[70vh] md:min-h-screen bg-black text-white overflow-hidden snap-start">
       {/* Top bar intentionally removed — header will provide navigation */}
 
-      <div className="relative flex min-h-screen items-center justify-center px-8 md:px-16">
+      <div className="relative flex min-h-[70vh] md:min-h-screen items-center justify-center px-8 md:px-16">
         <div className="max-w-7xl w-full">
           {/* Headline with hover GIF */}
           <HeadlineWithGif />
@@ -89,7 +89,7 @@ export const Hero2 = () => {
       <button
         type="button"
         onClick={() => setIsVideoOpen(true)}
-        className="absolute bottom-10 right-10 z-20 w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden"
+        className="absolute bottom-6 right-6 md:bottom-10 md:right-10 z-20 w-32 h-32 md:w-60 md:h-60 rounded-full overflow-hidden"
       >
         <div className="relative w-full h-full">
           <svg viewBox="0 0 240 240" className="w-full h-full animate-spin" style={{ animationDuration: '18s', animationTimingFunction: 'linear', animationIterationCount: 'infinite' }}>

@@ -5,7 +5,7 @@ import { portfolioData } from "@/data/portfolio";
 
 export const Stats = () => {
   return (
-    <section className="relative h-screen flex items-center py-24 md:py-40 px-6 md:px-24 bg-[#F5F2ED] text-black font-serif snap-start">
+    <section className="relative min-h-[70vh] md:h-screen flex items-center py-24 md:py-40 px-6 md:px-24 bg-[#F5F2ED] text-black font-serif snap-start">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-24">
           {portfolioData.stats.map((stat, index) => (

@@ -30,7 +30,7 @@ export const Mindset = () => {
   return (
     <section 
       id="about" 
-      className="relative min-h-screen bg-[#F5F2ED] py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] flex flex-col justify-center snap-start"
+      className="relative min-h-[70vh] md:min-h-screen bg-[#F5F2ED] py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] flex flex-col justify-center snap-start"
     >
       <div className="max-w-7xl">
         <motion.div

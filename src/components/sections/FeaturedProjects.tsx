@@ -149,7 +149,7 @@ export const FeaturedProjects = () => {
   return (
     <section 
       id="work" 
-      className="relative z-20 h-screen bg-[#F5F2ED] py-24 md:py-32 overflow-hidden flex flex-col justify-center snap-start xl:pl-[80px] pb-15"
+      className="relative z-20 min-h-[70vh] md:h-screen bg-[#F5F2ED] py-24 md:py-32 overflow-hidden flex flex-col justify-center snap-start xl:pl-[80px] pb-15"
     >
       <div className="px-8 md:px-16 mb-12 md:mb-16 pt-12 md:pt-60">
         <motion.div

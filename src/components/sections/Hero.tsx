@@ -7,10 +7,10 @@ import { CanvasImage } from "../ui/CanvasImage";
 
 export const Hero = () => {
   return (
-    <section id="hero" className="relative h-screen flex items-center bg-[#F5F2ED] overflow-hidden snap-start">
+    <section id="hero" className="relative min-h-[70vh] md:h-screen flex items-center bg-[#F5F2ED] overflow-hidden snap-start">
       <div className="w-full flex flex-col lg:flex-row items-center">
         {/* Left Side: Typography - Contained within standard padding */}
-        <div className="flex-1 w-full px-8 md:px-16 lg:pl-32 lg:pr-12 pt-32 lg:pt-0">
+        <div className="flex-1 w-full px-8 md:px-16 lg:pl-32 lg:pr-12 pt-12 md:pt-32 lg:pt-0">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -85,7 +85,7 @@ export const Hero = () => {
           initial={{ opacity: 0, scale: 0.95, x: 100 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="flex-1 w-full flex items-center justify-end h-screen"
+          className="flex-1 w-full flex items-center justify-end min-h-[70vh] md:h-screen"
         >
           <div className="w-full h-full max-w-[800px] lg:max-w-none relative flex items-center">
             <CanvasImage 

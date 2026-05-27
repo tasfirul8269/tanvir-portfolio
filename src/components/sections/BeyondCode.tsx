@@ -51,7 +51,7 @@ export const BeyondCode = () => {
     <section 
       ref={containerRef}
       id="beyond" 
-      className="relative min-h-screen bg-[#F5F2ED] overflow-hidden flex flex-col justify-start pt-36 md:pt-44 snap-start cursor-none"
+      className="relative hidden md:flex min-h-[70vh] md:min-h-screen bg-[#F5F2ED] overflow-hidden flex-col justify-start pt-36 md:pt-44 snap-start cursor-none"
       onMouseEnter={() => setIsPointerInside(true)}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => {

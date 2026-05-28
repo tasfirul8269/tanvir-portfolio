@@ -1,180 +1,168 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useRef, useEffect } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { portfolioData } from "@/data/portfolio";
-import { cn } from "@/lib/utils";
-import { ArrowRight, MoveRight } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface ProjectCardProps {
   project: any;
   index: number;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
+export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   return (
-    <div 
-      className="relative flex-shrink-0 w-[320px] md:w-[450px] aspect-video group cursor-pointer"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.15 }}
+      className="py-16 md:py-20 border-t border-black/10"
     >
-      <div className="w-full h-full relative overflow-hidden rounded-xl border border-black/5 bg-white shadow-sm">
-        {/* Front Side: Image / Graphic */}
-        <div className="absolute inset-0 z-0">
-          {project.image ? (
-            <Image 
-              src={project.image} 
-              alt={project.name}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center p-12 bg-[#fafafa]">
-               <span className="text-4xl md:text-5xl font-sans font-black tracking-tighter uppercase text-black/5 select-none text-center leading-none">
-                 {project.name.split(' ')[0]} <br />
-                 {project.name.split(' ')[1] || ''}
-               </span>
+      <div className="grid grid-cols-12 gap-0">
+        {/* Left Section */}
+        <div className="col-span-12 md:col-span-7 pr-4 md:pr-8">
+          {/* Top row: 2 images */}
+          <div className="flex gap-4 md:gap-6 mb-4 md:mb-6">
+            <div className="relative flex-shrink-0 w-[45%] aspect-[2/3] bg-black/5">
+              {project.images && project.images[0] ? (
+                <Image
+                  src={project.images[0]}
+                  alt={project.name}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-[#fafafa]">
+                  <span className="text-2xl font-sans font-black tracking-tighter uppercase text-black/5">
+                    {project.name.split(' ')[0]}
+                  </span>
+                </div>
+              )}
             </div>
-          )}
-          <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
+            <div className="relative flex-1 aspect-square bg-black/5 mt-8 md:mt-12">
+              {project.images && project.images[1] ? (
+                <Image
+                  src={project.images[1]}
+                  alt={project.name}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-[#fafafa]">
+                  <span className="text-2xl font-sans font-black tracking-tighter uppercase text-black/5">
+                    {project.name.split(' ')[1] || ''}
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Bottom: Large project title */}
+          <h3 className="text-6xl md:text-[10rem] font-sans font-black tracking-tighter uppercase leading-none text-black">
+            {project.name}
+            <span className="text-3xl md:text-5xl font-sans font-normal">.Co</span>
+          </h3>
         </div>
 
-        {/* Labels Layer (Always Visible) */}
-        <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end z-20 transition-opacity duration-300 group-hover:opacity-0">
-           <div className="flex flex-col gap-0.5">
-              <span className="text-[9px] font-sans font-bold text-black/30 tracking-widest uppercase">0{index + 1}</span>
-              <span className="text-xs font-sans font-bold text-black uppercase tracking-tight">{project.name}</span>
-           </div>
-           <div className="flex gap-1">
-              {project.tags.slice(0, 1).map((tag: string) => (
-                <span key={tag} className="text-[8px] bg-black/5 px-2 py-0.5 rounded-full uppercase font-bold text-black/40">
-                  {tag}
+        {/* Right Section */}
+        <div className="col-span-12 md:col-span-5 pl-4 md:pl-8 mt-12 md:mt-0">
+          {/* Top: Small text */}
+          <p className="text-xl md:text-3xl font-sans font-normal mb-4 md:mb-6 text-black">
+            {project.tags.slice(0, 2).join(' ')}
+          </p>
+
+          {/* Bottom: Large image */}
+          <div className="relative aspect-[4/5] bg-black/5">
+            {project.images && project.images[2] ? (
+              <Image
+                src={project.images[2]}
+                alt={project.name}
+                fill
+                className="object-cover"
+                unoptimized
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-[#fafafa]">
+                <span className="text-5xl font-sans font-black tracking-tighter uppercase text-black/5">
+                  {project.name}
                 </span>
-              ))}
-           </div>
+              </div>
+            )}
+          </div>
         </div>
-
-        {/* Detail Overlay: Slide-to-Detail */}
-        <AnimatePresence>
-          {isHovered && (
-            <motion.div 
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-0 z-30 bg-black p-6 md:p-8 flex flex-col justify-between text-white"
-            >
-              <div className="flex justify-between items-start">
-                <h3 className="text-lg font-sans font-bold uppercase tracking-tight">{project.name}</h3>
-                <div className="flex gap-1.5">
-                  {project.tags.map((tag: string) => (
-                    <span key={tag} className="text-[8px] border border-white/20 px-2 py-0.5 rounded-full uppercase font-bold text-white/40">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <h4 className="text-[8px] uppercase font-bold text-white/30 tracking-[0.2em] mb-1 font-sans">Problem</h4>
-                  <p className="text-[10px] font-serif leading-relaxed text-white/70 line-clamp-2">{project.problem}</p>
-                </div>
-                <div>
-                  <h4 className="text-[8px] uppercase font-bold text-white/30 tracking-[0.2em] mb-1 font-sans">Outcome</h4>
-                  <p className="text-[10px] font-serif leading-relaxed text-white/70 line-clamp-2">{project.outcome}</p>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-white/10 flex justify-between items-center">
-                 <div className="flex flex-col">
-                    <span className="text-[8px] uppercase font-bold text-white/20 tracking-widest font-sans">Engineering</span>
-                    <span className="text-[9px] font-mono text-white/60">{project.tech.split(',').slice(0, 2).join(',')}</span>
-                 </div>
-                 <ArrowRight size={16} className="text-white/40" />
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
-    </div>
-  );
-};
-
-const MarqueeRow = ({ projects, direction = "left", speed = 40 }: { projects: any[], direction?: "left" | "right", speed?: number }) => {
-  const [isPaused, setIsPaused] = useState(false);
-  
-  // Duplicate projects to ensure a seamless loop
-  const duplicatedProjects = [...projects, ...projects, ...projects];
-
-  return (
-    <div 
-      className="flex overflow-hidden w-full"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      <motion.div
-        className="flex gap-8 md:gap-12 py-4"
-        animate={{
-          x: direction === "left" ? ["0%", "-33.33%"] : ["-33.33%", "0%"]
-        }}
-        transition={{
-          duration: speed,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        style={{
-          playState: isPaused ? "paused" : "running"
-        } as any}
-      >
-        {duplicatedProjects.map((project, i) => (
-          <ProjectCard 
-            key={`${project.name}-${i}`} 
-            project={project} 
-            index={(i % projects.length)} 
-          />
-        ))}
-      </motion.div>
-    </div>
+    </motion.div>
   );
 };
 
 export const FeaturedProjects = () => {
-  const row1 = portfolioData.projects?.slice(0, 3) || [];
-  const row2 = portfolioData.projects?.slice(3, 6) || [];
+  const [isHovering, setIsHovering] = useState(false);
+  const router = useRouter();
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const springConfig = { stiffness: 500, damping: 30 };
+  const mouseX = useSpring(x, springConfig);
+  const mouseY = useSpring(y, springConfig);
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (sectionRef.current) {
+      const rect = sectionRef.current.getBoundingClientRect();
+      x.set(e.clientX - rect.left - 75);
+      y.set(e.clientY - rect.top - 75);
+    }
+  };
+
+  const featuredProjects = portfolioData.projects.slice(0, 3);
   return (
     <section 
       id="work" 
-      className="relative z-20 min-h-[70vh] md:h-screen bg-[#F5F2ED] py-24 md:py-32 overflow-hidden flex flex-col justify-center snap-start xl:pl-[80px] pb-15"
+      ref={sectionRef}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+      onMouseMove={handleMouseMove}
+      onClick={() => router.push('/projects')}
+      className="relative z-20 bg-[#F5F2ED] py-24 md:py-32 px-6 md:px-12 snap-start cursor-none"
     >
-      <div className="px-8 md:px-16 mb-12 md:mb-16 pt-12 md:pt-60">
+      {isHovering && (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col gap-4"
+          className="fixed pointer-events-none z-50 w-[150px] h-[150px] rounded-full bg-black flex items-center justify-center text-white text-sm font-bold uppercase tracking-wider"
+          style={{
+            left: mouseX,
+            top: mouseY,
+            position: 'absolute',
+          }}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
         >
-          <span className="text-[10px] uppercase tracking-[0.6em] font-sans font-bold text-black/30">Proof of Concept</span>
-          <h2 className="text-4xl md:text-7xl font-sans font-bold tracking-tighter uppercase text-black">
-            Featured <br /> Projects
-          </h2>
+          View All
         </motion.div>
-      </div>
+      )}
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col gap-4"
+          >
+            <span className="text-xs uppercase tracking-[0.4em] font-sans font-bold text-black/40">Selected Work</span>
+            <h2 className="text-4xl md:text-6xl font-sans font-bold tracking-tighter text-black">Featured Projects</h2>
+          </motion.div>
+        </div>
 
-      {/* Infinite Marquee Rows */}
-      <div className="flex flex-col gap-4 md:gap-8">
-        <MarqueeRow projects={row1} direction="left" speed={30} />
-        <MarqueeRow projects={row2} direction="right" speed={35} />
-      </div>
-
-      {/* Interactive Cue */}
-      <div className="absolute bottom-12 right-8 md:right-16 flex items-center gap-4 opacity-30">
-         <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-black">Hover to Pause</span>
-         <MoveRight size={20} className="animate-pulse" />
+        <div className="flex flex-col">
+          {featuredProjects.map((project, index) => (
+            <ProjectCard key={project.name} project={project} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );

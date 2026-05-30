@@ -26,7 +26,7 @@ export default function Home() {
       
       
       {/* Footer Section */}
-      <footer id="contact" className="relative min-h-[70vh] md:min-h-screen flex items-center py-24 md:py-40 px-6 md:px-24 bg-black text-white font-serif snap-start">
+      <footer id="contact" className="relative h-screen flex items-center py-24 md:py-40 px-6 md:px-24 bg-black text-white font-serif snap-start">
         <div className="max-w-7xl mx-auto text-center flex flex-col items-center gap-12">
           <h2 className="text-5xl md:text-8xl font-sans font-bold tracking-tighter uppercase">LET'S CREATE</h2>
           <p className="text-xl md:text-2xl text-white/70 max-w-2xl">
@@ -38,6 +38,27 @@ export default function Home() {
           >
             tanvir@frooxigroup.com
           </a>
+          
+          <div className="flex flex-col sm:flex-row gap-4 mt-8">
+            <a
+              href="#"
+              className="flex items-center gap-2 px-8 py-4 bg-white text-black font-sans font-bold text-sm uppercase tracking-wider hover:bg-white/90 transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Download My CV
+            </a>
+            <a
+              href="#"
+              className="flex items-center gap-2 px-8 py-4 border-2 border-white text-white font-sans font-bold text-sm uppercase tracking-wider hover:bg-white hover:text-black transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Book a Meeting
+            </a>
+          </div>
           
           <div className="mt-24 pt-12 border-t border-white/10 w-full flex flex-col md:flex-row justify-between items-center gap-8">
             <span className="text-[10px] uppercase tracking-[0.4em] text-white/40">

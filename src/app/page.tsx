@@ -52,8 +52,8 @@ export default function Home() {
       <Stats />
       <Snapshot />
       <Testimonials />
-      <Journey />
       <Mindset />
+      <Journey />
       <Learning />
       
       

@@ -64,10 +64,9 @@ export const Header = () => {
   }, []);
 
   const navLinks = [
-    { name: "Work", href: "#work" },
-    { name: "About", href: "#about" },
-    { name: "Notes", href: "#notes" },
-    { name: "Contact", href: "#contact", hasDot: true },
+    { name: "Work", href: "/projects" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact", hasDot: true },
   ];
 
   return (
@@ -105,6 +104,19 @@ export const Header = () => {
                )}
             </Link>
           ))}
+          <a
+            href="https://calendly.com/tanvir-almas/30min?month=2026-05"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              "text-[11px] uppercase tracking-[0.2em] font-semibold px-5 py-2.5 border transition-colors duration-200",
+              (isInSnapshot || isInHero2)
+                ? "border-white text-white hover:bg-white hover:text-black"
+                : "border-black text-black hover:bg-black hover:text-white"
+            )}
+          >
+            Book a Call
+          </a>
         </nav>
         
         <div className="flex items-center md:hidden">
@@ -167,6 +179,15 @@ export const Header = () => {
               <p className="text-xs uppercase tracking-widest text-black/40 dark:text-white/40 mb-4">Get in touch</p>
               <a href="mailto:hello@tanviralmas.com" className="text-xl font-serif underline">
                 hello@tanviralmas.com
+              </a>
+              <a
+                href="https://calendly.com/tanvir-almas/30min?month=2026-05"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="mt-6 inline-block text-[11px] uppercase tracking-[0.2em] font-semibold px-6 py-3 bg-black text-white hover:bg-black/80 transition-colors duration-200"
+              >
+                Book a Call
               </a>
             </div>
           </motion.div>

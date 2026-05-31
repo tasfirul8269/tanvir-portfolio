@@ -7,7 +7,7 @@ import { CanvasImage } from "../ui/CanvasImage";
 
 export const Hero = () => {
   return (
-    <section id="hero" className="relative min-h-[70vh] md:h-screen flex items-center bg-[#F5F2ED] overflow-hidden snap-start">
+    <section id="hero" className="relative min-h-[70vh] md:h-screen flex items-center bg-[#F5F2ED] overflow-hidden">
       <div className="w-full flex flex-col lg:flex-row items-center">
         {/* Left Side: Typography - Contained within standard padding */}
         <div className="flex-1 w-full px-8 md:px-16 lg:pl-32 lg:pr-12 pt-12 md:pt-32 lg:pt-0">

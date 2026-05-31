@@ -24,7 +24,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <div 
       id="main-scroll-container"
-      className="relative h-screen bg-[#F5F2ED] dark:bg-black text-black dark:text-white selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black overflow-y-auto snap-y snap-mandatory no-scrollbar"
+      className="relative h-screen bg-[#F5F2ED] dark:bg-black text-black dark:text-white selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black overflow-y-auto snap-y snap-proximity no-scrollbar"
       style={{ scrollPaddingTop: '6rem' }}
     >
       <Header />

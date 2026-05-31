@@ -178,7 +178,7 @@ export const FeaturedProjects3 = () => {
     <section 
       ref={sectionRef}
       id="work-3" 
-      className="relative z-20 bg-black text-white snap-start py-24 md:py-32 px-[5px]"
+      className="relative z-20 bg-black text-white py-24 md:py-32 px-[5px]"
     >
       <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-[10px] items-start">
         {projects.map((project, index) => {

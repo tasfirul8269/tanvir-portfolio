@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export const DividerWave = () => {
   return (
-    <section className="relative w-full py-4 bg-[#F5F2ED] overflow-hidden snap-start">
+    <section className="relative w-full py-4 bg-[#F5F2ED] overflow-hidden">
       <motion.svg
         width="100%"
         height="4"

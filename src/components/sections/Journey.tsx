@@ -5,7 +5,7 @@ import { portfolioData } from "@/data/portfolio";
 
 export const Journey = () => {
   return (
-    <section id="journey" className="relative min-h-[70vh] md:min-h-screen py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] xl:pr-24 bg-[#F5F2ED] border-t border-black/5 dark:border-white/5 font-serif snap-start">
+    <section id="journey" className="relative min-h-[70vh] md:min-h-screen py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] xl:pr-24 bg-[#F5F2ED] border-t border-black/5 dark:border-white/5 font-serif">
       <div className="max-w-7xl">
         <motion.div
           initial={{ opacity: 0 }}

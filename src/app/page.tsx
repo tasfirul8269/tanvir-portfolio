@@ -1,8 +1,6 @@
 import dynamic from "next/dynamic";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { Hero2 } from "@/components/sections/Hero2";
-import { FeaturedProjects2 } from "@/components/sections/FeaturedProjects2";
-import { FeaturedProjects3 } from "@/components/sections/FeaturedProjects3";
 import { FeaturedProjects4 } from "@/components/sections/FeaturedProjects4";
 import { Skeleton } from "@/components/ui/Skeleton";
 
@@ -14,9 +12,6 @@ const Snapshot = dynamic(() => import("@/components/sections/Snapshot").then(mod
   loading: () => <SectionLoading />,
 });
 const Journey = dynamic(() => import("@/components/sections/Journey").then(mod => mod.Journey), {
-  loading: () => <SectionLoading />,
-});
-const DividerWave = dynamic(() => import("@/components/sections/DividerWave").then(mod => mod.DividerWave), {
   loading: () => <SectionLoading />,
 });
 const Mindset = dynamic(() => import("@/components/sections/Mindset").then(mod => mod.Mindset), {
@@ -46,8 +41,6 @@ export default function Home() {
   return (
     <MainLayout>
       <Hero2 />
-      {/* <FeaturedProjects2 /> */}
-      {/* <FeaturedProjects3 /> */}
       <FeaturedProjects4 />
       <Stats />
       <Snapshot />

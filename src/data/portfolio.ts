@@ -22,84 +22,85 @@ export const portfolioData = {
   },
   projects: [
     {
-      name: "Health",
-      problem: "Traditional agencies deliver bloated, slow-loading websites that lack modern design flair.",
-      solution: "A high-performance agency platform focused on minimalism and cinematic web experiences.",
-      tech: "Next.js 15, Framer Motion, Tailwind CSS",
-      outcome: "Achieved 100/100 Lighthouse scores and helped 10+ clients establish a premium digital presence.",
-      tags: ["SaaS"],
-      // video: "https://cdn.pixabay.com/video/2021/04/12/70811-537332906_tiny.mp4",
-      images: [
-        "https://ik.imagekit.io/kgzsanmkb/ChatGPT%20Image%20May%2030,%202026,%2008_54_54%20PM.png",
-        "https://ik.imagekit.io/kgzsanmkb/ChatGPT%20Image%20May%2030,%202026,%2008_55_00%20PM.png",
-        "https://ik.imagekit.io/kgzsanmkb/ChatGPT%20Image%20May%2030,%202026,%2008_54_58%20PM.png"
-      ]
+      name: "Visual Identity",
+      problem: "Mock problem description",
+      solution: "Mock solution description",
+      tech: "Next.js, Framer Motion",
+      outcome: "Mock outcome",
+      tags: ["Design", "Branding"],
+      images: ["https://ik.imagekit.io/kgzsanmkb/ChatGPT%20Image%20May%2030,%202026,%2008_54_54%20PM.png"]
     },
     {
-      name: "Flow",
-      problem: "Manual content creation is time-consuming and often lacks data-driven SEO optimization.",
-      solution: "An automated AI pipeline that generates high-quality, SEO-optimized content using LLMs.",
-      tech: "TypeScript, OpenAI API, Node.js",
-      outcome: "Reduced content production time by 80% while increasing organic traffic for beta users.",
-      tags: ["AI", "Open Source", "SaaS"],
-      // video: "https://cdn.pixabay.com/video/2023/10/22/186084-877402660_tiny.mp4",
-      images: [
-        "https://ik.imagekit.io/kgzsanmkb/Gemini_Generated_Image_gobuxxgobuxxgobu%20(1).png",
-        "https://picsum.photos/id/5/800/800",
-        "https://ik.imagekit.io/kgzsanmkb/Gemini_Generated_Image_ci5dqwci5dqwci5d%20(1).png"
-      ]
+      name: "Digital Interface",
+      problem: "Mock problem description",
+      solution: "Mock solution description",
+      tech: "Next.js, Framer Motion",
+      outcome: "Mock outcome",
+      tags: ["UI/UX", "Product"],
+      images: ["https://ik.imagekit.io/kgzsanmkb/ChatGPT%20Image%20May%2030,%202026,%2008_55_00%20PM.png"]
     },
     {
-      name: "Stream",
-      problem: "E-commerce founders struggle to visualize real-time carbon footprint data of their supply chains.",
-      solution: "A real-time analytics dashboard that tracks and visualizes sustainability metrics.",
-      tech: "React, D3.js, Prisma, PostgreSQL",
-      outcome: "Enabled 5+ sustainable brands to report accurate ESG metrics to stakeholders.",
-      tags: ["E-Commerce", "Performance", "SaaS"],
-      images: [
-        // "https://picsum.photos/id/7/800/1200",
-        "https://picsum.photos/id/8/800/800",
-        // "https://picsum.photos/id/9/800/1000"
-      ]
+      name: "Abstract Motion",
+      problem: "Mock problem description",
+      solution: "Mock solution description",
+      tech: "Next.js, Framer Motion",
+      outcome: "Mock outcome",
+      tags: ["Animation", "3D"],
+      images: ["https://ik.imagekit.io/kgzsanmkb/ChatGPT%20Image%20May%2030,%202026,%2008_54_58%20PM.png"]
     },
     {
-      name: "Nebula",
-      problem: "Developers spend excessive time reinventing basic accessible UI components for complex SaaS apps.",
-      solution: "A high-end, headless UI library focused on accessibility and motion-rich interfaces.",
-      tech: "React, Radix UI, Framer Motion",
-      outcome: "Adopted by 500+ developers within the first month of open-source release.",
-      tags: ["Open Source", "UI/UX", "SaaS"],
-      images: [
-        "https://picsum.photos/id/10/800/1200",
-        "https://picsum.photos/id/11/800/800",
-        "https://picsum.photos/id/12/800/1000"
-      ]
+      name: "Future Canvas",
+      problem: "Mock problem description",
+      solution: "Mock solution description",
+      tech: "Next.js, Framer Motion",
+      outcome: "Mock outcome",
+      tags: ["Creative", "Web"],
+      images: ["https://ik.imagekit.io/kgzsanmkb/Gemini_Generated_Image_gobuxxgobuxxgobu%20(1).png"]
     },
     {
-      name: "Nexus",
-      problem: "Small businesses face complex integration hurdles when setting up multi-currency crypto payments.",
-      solution: "A simplified, secure payment gateway for decentralized finance transactions.",
-      tech: "Solidity, Next.js, ethers.js",
-      outcome: "Processed $1M+ in transactions with zero downtime and a 99.9% success rate.",
-      tags: ["FinTech", "Full Stack", "Blockchain"],
-      images: [
-        "https://picsum.photos/id/13/800/1200",
-        "https://picsum.photos/id/14/800/800",
-        "https://picsum.photos/id/15/800/1000"
-      ]
+      name: "Neural Design",
+      problem: "Mock problem description",
+      solution: "Mock solution description",
+      tech: "Next.js, Framer Motion",
+      outcome: "Mock outcome",
+      tags: ["AI", "Tech"],
+      images: ["https://ik.imagekit.io/kgzsanmkb/Gemini_Generated_Image_ci5dqwci5dqwci5d%20(1).png"]
     },
     {
-      name: "Atlas",
-      problem: "Existing CRMs are overly complex and difficult to navigate for fast-growing startup teams.",
-      solution: "A focused, lightning-fast CRM that prioritizes workflow speed and relationship visualization.",
-      tech: "Next.js, Supabase, Tailwind CSS",
-      outcome: "Improved team productivity by 40% for early-adopter startups.",
-      tags: ["SaaS", "Productivity", "Full Stack"],
-      images: [
-        "https://picsum.photos/id/16/800/1200",
-        "https://picsum.photos/id/17/800/800",
-        "https://picsum.photos/id/18/800/1000"
-      ]
+      name: "Minimalist Flow",
+      problem: "Mock problem description",
+      solution: "Mock solution description",
+      tech: "Next.js, Framer Motion",
+      outcome: "Mock outcome",
+      tags: ["Editorial", "SaaS"],
+      images: ["https://i.pinimg.com/1200x/b1/87/f4/b187f4c5c6af6d83d477e393c0bb9944.jpg"]
+    },
+    {
+      name: "LIV Golf 2025",
+      problem: "Mock problem description",
+      solution: "Mock solution description",
+      tech: "Next.js, Framer Motion",
+      outcome: "Mock outcome",
+      tags: ["Sports", "Branding"],
+      images: ["https://i.pinimg.com/1200x/55/6d/70/556d7092fe9d2e0fd114ff2895930a97.jpg"]
+    },
+    {
+      name: "Editorial Concept",
+      problem: "Mock problem description",
+      solution: "Mock solution description",
+      tech: "Next.js, Framer Motion",
+      outcome: "Mock outcome",
+      tags: ["Magazine", "Design"],
+      images: ["https://i.pinimg.com/736x/96/17/5e/96175eb62d3045ce8bb1a5f74d8cf694.jpg"]
+    },
+    {
+      name: "Cinematic Web",
+      problem: "Mock problem description",
+      solution: "Mock solution description",
+      tech: "Next.js, Framer Motion",
+      outcome: "Mock outcome",
+      tags: ["Motion", "Interactive"],
+      images: ["https://i.pinimg.com/736x/fd/c1/02/fdc10255b4fb8848489091ea555313d1.jpg"]
     }
   ],
   journey: [

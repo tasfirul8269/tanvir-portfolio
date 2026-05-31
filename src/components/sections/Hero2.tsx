@@ -63,33 +63,95 @@ function HeadlineWithGif() {
 
 export const Hero2 = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [isTextHovered, setIsTextHovered] = useState(false);
 
   return (
     <section id="hero2" className="relative min-h-[70vh] md:min-h-screen bg-black text-white overflow-hidden snap-start">
       {/* Top bar intentionally removed — header will provide navigation */}
 
-      <div className="relative flex min-h-[70vh] md:min-h-screen items-center justify-center px-8 md:px-16">
+      {/* Radial blur overlay when text is hovered */}
+      <motion.div 
+        className="absolute inset-0 pointer-events-none z-[5]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isTextHovered ? 1 : 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          backdropFilter: isTextHovered ? 'blur(3px)' : 'blur(0px)',
+          WebkitBackdropFilter: isTextHovered ? 'blur(3px)' : 'blur(0px)',
+          maskImage: 'radial-gradient(circle at 30% 60%, transparent 25%, black 60%)',
+          WebkitMaskImage: 'radial-gradient(circle at 30% 60%, transparent 25%, black 60%)',
+        }}
+      />
+
+      <div className="relative flex min-h-[70vh] md:min-h-screen items-center px-8 md:px-16 xl:pl-[160px] xl:pr-24">
         <div className="max-w-7xl w-full">
           {/* Headline with hover GIF */}
-          <HeadlineWithGif />
+          <motion.div
+            animate={{ 
+              opacity: isTextHovered ? 0.5 : 1,
+              scale: isTextHovered ? 0.98 : 1
+            }}
+            transition={{ 
+              duration: 0.6, 
+              ease: [0.16, 1, 0.3, 1]
+            }}
+            style={{ willChange: 'transform, opacity' }}
+          >
+            <HeadlineWithGif />
+          </motion.div>
 
           <div className="mt-14 max-w-3xl space-y-8">
-            <div className="flex items-center gap-4">
+            <motion.div 
+              className="flex items-center gap-4"
+              animate={{ 
+                opacity: isTextHovered ? 0.5 : 1,
+                scale: isTextHovered ? 0.98 : 1
+              }}
+              transition={{ 
+                duration: 0.6, 
+                ease: [0.16, 1, 0.3, 1]
+              }}
+              style={{ willChange: 'transform, opacity' }}
+            >
               <span className="block h-px w-20 bg-white/40" />
               <span className="text-xs uppercase tracking-[0.4em] text-white/50 font-sans">The Thoughts</span>
-            </div>
+            </motion.div>
 
-            <p className="text-2xl md:text-4xl font-sans font-bold leading-[1.05] text-white/90 max-w-4xl">
+            <motion.p 
+              onMouseEnter={() => setIsTextHovered(true)}
+              onMouseLeave={() => setIsTextHovered(false)}
+              animate={{ 
+                scale: isTextHovered ? 1.03 : 1,
+                y: isTextHovered ? -4 : 0
+              }}
+              transition={{ 
+                type: "spring",
+                stiffness: 300,
+                damping: 30,
+                mass: 0.8
+              }}
+              className="text-2xl md:text-4xl font-sans font-bold leading-[1.05] text-white/90 max-w-4xl cursor-pointer relative z-10"
+              style={{ willChange: 'transform' }}
+            >
               I bring ideas to life through sleek, innovative design, crafting experiences that go beyond visuals to captivate and engage.
-            </p>
+            </motion.p>
           </div>
         </div>
       </div>
 
-      <button
+      <motion.button
         type="button"
         onClick={() => setIsVideoOpen(true)}
-        className="absolute bottom-6 right-6 md:bottom-10 md:right-10 z-20 w-32 h-32 md:w-60 md:h-60 rounded-full overflow-hidden"
+        animate={{ 
+          opacity: isTextHovered ? 0.5 : 1,
+          scale: isTextHovered ? 0.95 : 1
+        }}
+        transition={{ 
+          duration: 0.6, 
+          ease: [0.16, 1, 0.3, 1]
+        }}
+        className="absolute bottom-6 right-6 md:bottom-10 md:right-10 z-20 w-32 h-32 md:w-60 md:h-60 rounded-full overflow-hidden cursor-pointer"
+        style={{ willChange: 'transform, opacity' }}
       >
         <div className="relative w-full h-full">
           <svg viewBox="0 0 240 240" className="w-full h-full animate-spin" style={{ animationDuration: '18s', animationTimingFunction: 'linear', animationIterationCount: 'infinite' }}>
@@ -110,7 +172,7 @@ export const Hero2 = () => {
             </div>
           </div>
         </div>
-      </button>
+      </motion.button>
 
       <AnimatePresence>
         {isVideoOpen && (

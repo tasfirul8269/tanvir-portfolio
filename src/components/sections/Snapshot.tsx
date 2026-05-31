@@ -5,8 +5,8 @@ import { portfolioData } from "@/data/portfolio";
 
 export const Snapshot = () => {
   return (
-    <section id="snapshot" className="relative z-10 min-h-[70vh] md:h-screen flex items-center py-24 md:py-40 px-6 md:px-24 overflow-hidden bg-black text-white font-serif snap-start">
-      <div className="max-w-7xl mx-auto">
+    <section id="snapshot" className="relative z-10 min-h-[70vh] md:h-screen flex items-center py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] xl:pr-24 overflow-hidden bg-black text-white font-serif snap-start">
+      <div className="max-w-7xl">
         <div className="flex flex-col gap-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -29,9 +29,9 @@ export const Snapshot = () => {
               transition={{ duration: 0.8 }}
               className="text-4xl md:text-6xl font-sans font-bold leading-tight text-white"
             >
-              Building the future <br />
-              of the web, <br />
-              one pixel at a time.
+              My Prefered <br />
+              Technologies <br />
+              for Developement
             </motion.h2>
             
             <div className="grid grid-cols-2 gap-x-12 gap-y-16">

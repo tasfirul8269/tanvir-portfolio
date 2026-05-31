@@ -18,7 +18,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.15 }}
-      className="py-16 md:py-20 border-t border-black/10"
+      className="py-16 md:py-20 border-t border-black/10 cursor-pointer"
     >
       <div className="grid grid-cols-12 gap-0">
         {/* Left Section */}
@@ -64,7 +64,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           {/* Bottom: Large project title */}
           <h3 className="text-6xl md:text-[10rem] font-sans font-black tracking-tighter uppercase leading-none text-black">
             {project.name}
-            <span className="text-3xl md:text-5xl font-sans font-normal">.Co</span>
           </h3>
         </div>
 
@@ -128,7 +127,7 @@ export const FeaturedProjects = () => {
       onMouseLeave={() => setIsHovering(false)}
       onMouseMove={handleMouseMove}
       onClick={() => router.push('/projects')}
-      className="relative z-20 bg-[#F5F2ED] py-24 md:py-32 px-6 md:px-12 snap-start cursor-none"
+      className="relative z-20 bg-[#F5F2ED] py-24 md:py-32 px-8 md:px-16 xl:pl-[160px] xl:pr-24 snap-start cursor-none"
     >
       {isHovering && (
         <motion.div
@@ -145,7 +144,7 @@ export const FeaturedProjects = () => {
           View All
         </motion.div>
       )}
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl">
         <div className="mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

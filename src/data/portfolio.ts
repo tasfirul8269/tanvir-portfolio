@@ -22,29 +22,31 @@ export const portfolioData = {
   },
   projects: [
     {
-      name: "Frooxi",
+      name: "Health",
       problem: "Traditional agencies deliver bloated, slow-loading websites that lack modern design flair.",
       solution: "A high-performance agency platform focused on minimalism and cinematic web experiences.",
       tech: "Next.js 15, Framer Motion, Tailwind CSS",
       outcome: "Achieved 100/100 Lighthouse scores and helped 10+ clients establish a premium digital presence.",
-      tags: ["SaaS", "Performance", "Full Stack"],
+      tags: ["SaaS"],
+      // video: "https://cdn.pixabay.com/video/2021/04/12/70811-537332906_tiny.mp4",
       images: [
-        "https://picsum.photos/id/1/800/1200",
-        "https://picsum.photos/id/2/800/800",
-        "https://picsum.photos/id/3/800/1000"
+        "https://ik.imagekit.io/kgzsanmkb/ChatGPT%20Image%20May%2030,%202026,%2008_54_54%20PM.png",
+        "https://ik.imagekit.io/kgzsanmkb/ChatGPT%20Image%20May%2030,%202026,%2008_55_00%20PM.png",
+        "https://ik.imagekit.io/kgzsanmkb/ChatGPT%20Image%20May%2030,%202026,%2008_54_58%20PM.png"
       ]
     },
     {
-      name: "Salerly",
+      name: "Flow",
       problem: "Manual content creation is time-consuming and often lacks data-driven SEO optimization.",
       solution: "An automated AI pipeline that generates high-quality, SEO-optimized content using LLMs.",
       tech: "TypeScript, OpenAI API, Node.js",
       outcome: "Reduced content production time by 80% while increasing organic traffic for beta users.",
       tags: ["AI", "Open Source", "SaaS"],
+      // video: "https://cdn.pixabay.com/video/2023/10/22/186084-877402660_tiny.mp4",
       images: [
-        "https://picsum.photos/id/4/800/1200",
+        "https://ik.imagekit.io/kgzsanmkb/Gemini_Generated_Image_gobuxxgobuxxgobu%20(1).png",
         "https://picsum.photos/id/5/800/800",
-        "https://picsum.photos/id/6/800/1000"
+        "https://ik.imagekit.io/kgzsanmkb/Gemini_Generated_Image_ci5dqwci5dqwci5d%20(1).png"
       ]
     },
     {
@@ -55,9 +57,9 @@ export const portfolioData = {
       outcome: "Enabled 5+ sustainable brands to report accurate ESG metrics to stakeholders.",
       tags: ["E-Commerce", "Performance", "SaaS"],
       images: [
-        "https://picsum.photos/id/7/800/1200",
+        // "https://picsum.photos/id/7/800/1200",
         "https://picsum.photos/id/8/800/800",
-        "https://picsum.photos/id/9/800/1000"
+        // "https://picsum.photos/id/9/800/1000"
       ]
     },
     {

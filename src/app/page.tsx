@@ -1,20 +1,52 @@
+import dynamic from "next/dynamic";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { Hero2 } from "@/components/sections/Hero2";
-import { Stats } from "@/components/sections/Stats";
-import { Snapshot } from "@/components/sections/Snapshot";
-import { Journey } from "@/components/sections/Journey";
-import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
-import { DividerWave } from "@/components/sections/DividerWave";
-import { Mindset } from "@/components/sections/Mindset";
-import { Learning } from "@/components/sections/Learning";
-import { BeyondCode } from "@/components/sections/BeyondCode";
-import { Testimonials } from "@/components/sections/Testimonials";
+import { FeaturedProjects2 } from "@/components/sections/FeaturedProjects2";
+import { FeaturedProjects3 } from "@/components/sections/FeaturedProjects3";
+import { Skeleton } from "@/components/ui/Skeleton";
+
+// Dynamic imports for optimized loading
+const Stats = dynamic(() => import("@/components/sections/Stats").then(mod => mod.Stats), {
+  loading: () => <SectionLoading />,
+});
+const Snapshot = dynamic(() => import("@/components/sections/Snapshot").then(mod => mod.Snapshot), {
+  loading: () => <SectionLoading />,
+});
+const Journey = dynamic(() => import("@/components/sections/Journey").then(mod => mod.Journey), {
+  loading: () => <SectionLoading />,
+});
+const DividerWave = dynamic(() => import("@/components/sections/DividerWave").then(mod => mod.DividerWave), {
+  loading: () => <SectionLoading />,
+});
+const Mindset = dynamic(() => import("@/components/sections/Mindset").then(mod => mod.Mindset), {
+  loading: () => <SectionLoading />,
+});
+const Learning = dynamic(() => import("@/components/sections/Learning").then(mod => mod.Learning), {
+  loading: () => <SectionLoading />,
+});
+const Testimonials = dynamic(() => import("@/components/sections/Testimonials").then(mod => mod.Testimonials), {
+  loading: () => <SectionLoading />,
+});
+
+function SectionLoading() {
+  return (
+    <div className="w-full h-[70vh] md:h-screen p-8 md:p-24 bg-black/5 flex flex-col gap-8">
+      <Skeleton className="w-48 h-8" />
+      <Skeleton className="w-full h-32" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
+        <Skeleton className="w-full h-64" />
+        <Skeleton className="w-full h-64" />
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
     <MainLayout>
       <Hero2 />
-      <FeaturedProjects />
+      {/* <FeaturedProjects2 /> */}
+      <FeaturedProjects3 />
       <Stats />
       <Snapshot />
       <DividerWave />
@@ -22,11 +54,10 @@ export default function Home() {
       <Journey />
       <Mindset />
       <Learning />
-      <BeyondCode />
       
       
       {/* Footer Section */}
-      <footer id="contact" className="relative h-screen flex items-center py-24 md:py-40 px-6 md:px-24 bg-black text-white font-serif snap-start">
+      <footer id="contact" className="relative min-h-[70vh] md:min-h-screen flex items-center py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] xl:pr-24 bg-black text-white font-serif snap-start">
         <div className="max-w-7xl mx-auto text-center flex flex-col items-center gap-12">
           <h2 className="text-5xl md:text-8xl font-sans font-bold tracking-tighter uppercase">LET'S CREATE</h2>
           <p className="text-xl md:text-2xl text-white/70 max-w-2xl">

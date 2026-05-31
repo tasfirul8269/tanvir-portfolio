@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { portfolioData } from "@/data/portfolio";
+import { useSidebarStore } from "@/store/sidebarStore";
 
 const InstagramIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -40,6 +41,8 @@ const iconMap: Record<string, React.FC> = {
 };
 
 export const Sidebar = () => {
+  const { isHidden } = useSidebarStore();
+  
   const socialLinks = [
     { name: "LinkedIn", icon: "LinkedIn", url: "https://linkedin.com/in/tanvir-almas" },
     { name: "Github", icon: "Github", url: "https://github.com/dev-tanvu" },
@@ -50,8 +53,11 @@ export const Sidebar = () => {
   return (
     <motion.aside
       initial={{ x: -100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+      animate={{ 
+        x: isHidden ? -100 : 0, 
+        opacity: isHidden ? 0 : 1 
+      }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="fixed left-0 top-0 bottom-0 z-40 hidden xl:flex flex-col justify-center w-[80px] bg-transparent mix-blend-difference pointer-events-none"
     >
       <div className="flex flex-col items-center gap-12 pointer-events-auto">

@@ -97,7 +97,7 @@ export const Testimonials = () => {
   return (
     <section 
       id="testimonials" 
-      className="relative min-h-[70vh] md:min-h-screen bg-[#F5F2ED] py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] flex flex-col justify-center snap-start overflow-hidden"
+      className="relative min-h-[70vh] md:min-h-screen bg-[#F5F2ED] py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] xl:pr-24 flex flex-col justify-center snap-start overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

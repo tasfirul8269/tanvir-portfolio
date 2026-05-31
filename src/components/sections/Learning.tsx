@@ -26,7 +26,7 @@ export const Learning = () => {
   return (
     <section 
       id="learning" 
-      className="relative min-h-[70vh] md:min-h-screen bg-black text-white py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] flex flex-col justify-center snap-start"
+      className="relative min-h-[70vh] md:min-h-screen bg-black text-white py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] xl:pr-24 flex flex-col justify-center snap-start"
     >
       <div className="max-w-7xl">
         <motion.div

@@ -1,6 +1,49 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect } from "react";
+import { useInView, useScroll, useTransform, motion } from "framer-motion";
+import { useSidebarStore } from "@/store/sidebarStore";
+
+// ---------------------------------------------------------------------------
+// SpinningAsterisk — 6-blade asterisk that rotates on scroll
+// ---------------------------------------------------------------------------
+function SpinningAsterisk({ sectionRef, scrollContainerRef }: {
+  sectionRef: React.RefObject<HTMLElement | null>;
+  scrollContainerRef: React.RefObject<HTMLElement | null>;
+}) {
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    container: scrollContainerRef as React.RefObject<HTMLElement>,
+    offset: ["start end", "end start"],
+  });
+
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
+
+  // 6 blades, each rotated 60° apart
+  const blades = Array.from({ length: 6 }, (_, i) => i * 60);
+
+  return (
+    <motion.div
+      style={{ rotate }}
+      className="w-48 h-48 md:w-64 md:h-64 will-change-transform"
+    >
+      <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
+        {blades.map((angle) => (
+          <rect
+            key={angle}
+            x="44"
+            y="8"
+            width="12"
+            height="38"
+            rx="3"
+            fill="#1D3BB3"
+            transform={`rotate(${angle} 50 50)`}
+          />
+        ))}
+      </svg>
+    </motion.div>
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Stars — 5 actual star characters
@@ -29,14 +72,34 @@ function QuoteText({ children, pushDown = false }: { children: string; pushDown?
   );
 }
 export const Testimonials = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollContainerRef = useRef<HTMLElement | null>(null);
+  const { setHidden } = useSidebarStore();
+  const isInView = useInView(sectionRef, { amount: 0.1 });
+
+  useEffect(() => {
+    scrollContainerRef.current = document.getElementById("main-scroll-container") as HTMLElement | null;
+  }, []);
+
+  useEffect(() => {
+    setHidden(isInView);
+    return () => setHidden(false);
+  }, [isInView, setHidden]);
+
   // Fixed column height so all 4 columns are equal
   const COL_H = "h-[520px]";
 
   return (
     <section
+      ref={sectionRef}
       id="testimonials"
-      className="relative bg-[#EEECE7] py-14 px-6 md:px-14 xl:px-20 overflow-hidden"
+      className="relative bg-[#F5F2ED] py-14 px-6 md:px-14 xl:px-20 overflow-hidden"
     >
+      {/* ── Spinning asterisk — top right, behind columns ── */}
+      <div className="absolute top-24 right-4 md:top-32 md:right-8 z-0 opacity-60 pointer-events-none">
+        <SpinningAsterisk sectionRef={sectionRef} scrollContainerRef={scrollContainerRef} />
+      </div>
+
       {/* ── Header ── */}
       <div className="mb-10">
         {/* Top-left label */}
@@ -57,7 +120,7 @@ export const Testimonials = () => {
       </div>
 
       {/* ── 4-column grid — all same height ── */}
-      <div className={`grid grid-cols-1 md:grid-cols-4 gap-1 ${COL_H}`}>
+      <div className={`relative z-10 grid grid-cols-1 md:grid-cols-4 gap-1 ${COL_H}`}>
 
         {/* ── Col 1: Rating card ── */}
         <div className="bg-white rounded-2xl p-6 flex flex-col justify-between h-full">

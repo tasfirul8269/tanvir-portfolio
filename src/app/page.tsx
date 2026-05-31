@@ -51,7 +51,6 @@ export default function Home() {
       <FeaturedProjects4 />
       <Stats />
       <Snapshot />
-      <DividerWave />
       <Testimonials />
       <Journey />
       <Mindset />

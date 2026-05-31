@@ -3,6 +3,7 @@ import { MainLayout } from "@/components/layout/MainLayout";
 import { Hero2 } from "@/components/sections/Hero2";
 import { FeaturedProjects2 } from "@/components/sections/FeaturedProjects2";
 import { FeaturedProjects3 } from "@/components/sections/FeaturedProjects3";
+import { FeaturedProjects4 } from "@/components/sections/FeaturedProjects4";
 import { Skeleton } from "@/components/ui/Skeleton";
 
 // Dynamic imports for optimized loading
@@ -46,7 +47,8 @@ export default function Home() {
     <MainLayout>
       <Hero2 />
       {/* <FeaturedProjects2 /> */}
-      <FeaturedProjects3 />
+      {/* <FeaturedProjects3 /> */}
+      <FeaturedProjects4 />
       <Stats />
       <Snapshot />
       <DividerWave />
@@ -57,7 +59,7 @@ export default function Home() {
       
       
       {/* Footer Section */}
-      <footer id="contact" className="relative min-h-[70vh] md:min-h-screen flex items-center py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] xl:pr-24 bg-black text-white font-serif snap-start">
+      <footer id="contact" className="relative min-h-[70vh] md:min-h-screen flex items-center py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] xl:pr-24 bg-black text-white font-serif">
         <div className="max-w-7xl mx-auto text-center flex flex-col items-center gap-12">
           <h2 className="text-5xl md:text-8xl font-sans font-bold tracking-tighter uppercase">LET'S CREATE</h2>
           <p className="text-xl md:text-2xl text-white/70 max-w-2xl">

@@ -5,7 +5,7 @@ import { portfolioData } from "@/data/portfolio";
 
 export const Snapshot = () => {
   return (
-    <section id="snapshot" className="relative z-10 min-h-[70vh] md:h-screen flex items-center py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] xl:pr-24 overflow-hidden bg-black text-white font-serif snap-start">
+    <section id="snapshot" className="relative z-10 min-h-[70vh] md:h-screen flex items-center py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] xl:pr-24 overflow-hidden bg-black text-white font-serif">
       <div className="max-w-7xl">
         <div className="flex flex-col gap-12">
           <motion.div

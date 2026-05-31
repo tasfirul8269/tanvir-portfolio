@@ -127,7 +127,7 @@ export const FeaturedProjects = () => {
       onMouseLeave={() => setIsHovering(false)}
       onMouseMove={handleMouseMove}
       onClick={() => router.push('/projects')}
-      className="relative z-20 bg-[#F5F2ED] py-24 md:py-32 px-8 md:px-16 xl:pl-[160px] xl:pr-24 snap-start cursor-none"
+      className="relative z-20 bg-[#F5F2ED] py-24 md:py-32 px-8 md:px-16 xl:pl-[160px] xl:pr-24 cursor-none"
     >
       {isHovering && (
         <motion.div

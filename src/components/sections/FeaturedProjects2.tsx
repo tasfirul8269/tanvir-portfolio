@@ -165,7 +165,7 @@ export const FeaturedProjects2 = () => {
   ];
 
   return (
-    <section id="work" className="relative z-20 bg-black text-white snap-start">
+    <section id="work" className="relative z-20 bg-black text-white">
       {projectPairs.map((pair, sectionIndex) => {
         const isOddSection = sectionIndex % 2 !== 0;
         

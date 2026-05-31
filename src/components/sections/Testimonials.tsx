@@ -1,206 +1,250 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Quote } from "lucide-react";
-import Image from "next/image";
+import React, { useRef, useEffect } from "react";
+import { useInView, useScroll, useTransform, motion } from "framer-motion";
+import { useSidebarStore } from "@/store/sidebarStore";
 
-const testimonials = [
-  {
-    quote: "Delivered beyond expectations and communicated professionally throughout the entire project.",
-    author: "James Wilson",
-    role: "CEO, TechStream",
-    year: "2024",
-    media: "/images/testimonial-1.webp", // Placeholder path
-    type: "image"
-  },
-  {
-    quote: "Tanvir's ability to translate complex business requirements into elegant technical solutions is rare.",
-    author: "Sarah Chen",
-    role: "Product Manager, Innovate HQ",
-    year: "2023",
-    media: "/images/testimonial-2.webp", // Placeholder path
-    type: "image"
-  },
-  {
-    quote: "The fastest developer I've worked with. Performance and design quality are top-notch.",
-    author: "Marcus Thorne",
-    role: "Founder, Frooxi Digital",
-    year: "2024",
-    media: "/images/testimonial-3.webp", // Placeholder path
-    type: "image"
-  },
-];
+// ---------------------------------------------------------------------------
+// SpinningAsterisk — 6-blade asterisk that rotates on scroll
+// ---------------------------------------------------------------------------
+function SpinningAsterisk({ sectionRef, scrollContainerRef }: {
+  sectionRef: React.RefObject<HTMLElement | null>;
+  scrollContainerRef: React.RefObject<HTMLElement | null>;
+}) {
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    container: scrollContainerRef as React.RefObject<HTMLElement>,
+    offset: ["start end", "end start"],
+  });
 
-export const Testimonials = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
 
-  const nextTestimonial = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
-  }, []);
-
-  const prevTestimonial = useCallback(() => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  }, []);
-
-  // Autoplay control with reset on manual navigation
-  const intervalRef = useRef<number | null>(null);
-  const AUTOPLAY_DELAY = 5000;
-
-  const stopAutoplay = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-  }, []);
-
-  const startAutoplay = useCallback(() => {
-    stopAutoplay();
-    intervalRef.current = window.setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, AUTOPLAY_DELAY) as unknown as number;
-  }, [stopAutoplay]);
-
-  // Start/stop autoplay based on pause state
-  useEffect(() => {
-    if (isPaused) {
-      stopAutoplay();
-      return;
-    }
-    startAutoplay();
-    return () => stopAutoplay();
-  }, [isPaused, startAutoplay, stopAutoplay]);
-
-  // Reset autoplay after manual navigation. If paused (hovering), defer restart
-  const resetAutoplay = useCallback(() => {
-    stopAutoplay();
-    if (isPaused) {
-      // don't start while hovered — autoplay will restart on mouse leave
-      return;
-    }
-    startAutoplay();
-  }, [startAutoplay, stopAutoplay, isPaused]);
-
-  // Swipe handling
-  const handleDragEnd = (event: any, info: any) => {
-    if (info.offset.x > 100) {
-      prevTestimonial();
-      resetAutoplay();
-    } else if (info.offset.x < -100) {
-      nextTestimonial();
-      resetAutoplay();
-    }
-  };
+  // 6 blades, each rotated 60° apart
+  const blades = Array.from({ length: 6 }, (_, i) => i * 60);
 
   return (
-    <section 
-      id="testimonials" 
-      className="relative min-h-[70vh] md:min-h-screen bg-[#F5F2ED] py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] xl:pr-24 flex flex-col justify-center overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+    <motion.div
+      style={{ rotate }}
+      className="w-48 h-48 md:w-64 md:h-64 will-change-transform"
     >
-      <div className="max-w-5xl relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-16 md:mb-24"
-        >
-          <span className="text-[10px] uppercase tracking-[0.6em] font-sans font-bold text-black/30 block mb-4">Social Proof</span>
-          <h2 className="text-4xl md:text-7xl font-sans font-bold tracking-tighter uppercase text-black leading-none">
-            Trusted <br /> by Clients
-          </h2>
-        </motion.div>
+      <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
+        {blades.map((angle) => (
+          <rect
+            key={angle}
+            x="44"
+            y="8"
+            width="12"
+            height="38"
+            rx="3"
+            fill="#1D3BB3"
+            transform={`rotate(${angle} 50 50)`}
+          />
+        ))}
+      </svg>
+    </motion.div>
+  );
+}
 
-        <div className="relative min-h-[400px] flex flex-col justify-center cursor-grab active:cursor-grabbing">
-          {/* Animated Media Reveal on Hover */}
-          <AnimatePresence>
-            {isHovered && testimonials[activeIndex].media && (
-              <motion.div
-                initial={{ opacity: 0, y: 40, x: 40, rotate: 0 }}
-                animate={{ opacity: 1, y: -120, x: 100, rotate: -8 }}
-                exit={{ opacity: 0, y: 40, x: 40, rotate: 0 }}
-                className="absolute top-0 right-0 z-30 hidden lg:block pointer-events-none"
-              >
-                <div className="relative w-64 aspect-[4/5] rounded-xl overflow-hidden shadow-2xl border-4 border-white">
-                  <div className="absolute inset-0 bg-black/10 z-10" />
-                  {/* Using a colored div as fallback if image isn't found */}
-                  <div className="absolute inset-0 bg-[#3D43D1]/20" /> 
-                  <Image 
-                    src={testimonials[activeIndex].media} 
-                    alt={testimonials[activeIndex].author}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute bottom-4 left-4 z-20">
-                     <span className="text-[10px] text-white uppercase font-bold tracking-widest bg-black/50 px-2 py-1 backdrop-blur-sm">Verified Client</span>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+// ---------------------------------------------------------------------------
+// Stars — 5 actual star characters
+// ---------------------------------------------------------------------------
+function Stars() {
+  return (
+    <div className="flex gap-[2px] items-center">
+      {[0,1,2,3,4].map(i => (
+        <span key={i} className="text-black text-[11px] leading-none">★</span>
+      ))}
+    </div>
+  );
+}
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              onDragEnd={handleDragEnd}
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-              className="flex flex-col gap-8 md:gap-12 select-none"
-            >
-              <Quote size={40} className="text-black/10" strokeWidth={1.5} />
-              
-              <blockquote className="text-2xl md:text-5xl font-serif italic leading-[1.2] text-black tracking-tight max-w-4xl">
-                "{testimonials[activeIndex].quote}"
-              </blockquote>
+// ---------------------------------------------------------------------------
+// QuoteText — matches reference: large, medium weight, first-line indent
+// ---------------------------------------------------------------------------
+function QuoteText({ children, pushDown = false }: { children: string; pushDown?: boolean }) {
+  return (
+    <p
+      className={`text-[1.35rem] font-sans font-medium text-black leading-[1.4] ${pushDown ? "mt-auto" : ""}`}
+      style={{ textIndent: "2.2em" }}
+    >
+      {children}
+    </p>
+  );
+}
+export const Testimonials = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollContainerRef = useRef<HTMLElement | null>(null);
+  const { setHidden } = useSidebarStore();
+  const isInView = useInView(sectionRef, { amount: 0.1 });
 
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pt-8 border-t border-black/5">
-                <div className="flex flex-col gap-1">
-                  <span className="text-lg font-sans font-bold uppercase tracking-tight text-black">
-                    {testimonials[activeIndex].author}
-                  </span>
-                  <span className="text-[10px] uppercase tracking-[0.2em] font-sans font-bold text-black/40">
-                    {testimonials[activeIndex].role}
-                  </span>
-                </div>
-                
-                <span className="text-[10px] font-sans font-black text-black/10 tracking-widest">
-                  EST. {testimonials[activeIndex].year}
-                </span>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+  useEffect(() => {
+    scrollContainerRef.current = document.getElementById("main-scroll-container") as HTMLElement | null;
+  }, []);
+
+  useEffect(() => {
+    setHidden(isInView);
+    return () => setHidden(false);
+  }, [isInView, setHidden]);
+
+  // Fixed column height so all 4 columns are equal
+  const COL_H = "h-[520px]";
+
+  return (
+    <section
+      ref={sectionRef}
+      id="testimonials"
+      className="relative bg-[#F5F2ED] py-14 px-6 md:px-14 xl:px-20 overflow-hidden"
+    >
+      {/* ── Spinning asterisk — top right, behind columns ── */}
+      <div className="absolute top-24 right-4 md:top-32 md:right-8 z-0 opacity-60 pointer-events-none">
+        <SpinningAsterisk sectionRef={sectionRef} scrollContainerRef={scrollContainerRef} />
+      </div>
+
+      {/* ── Header ── */}
+      <div className="mb-10">
+        {/* Top-left label */}
+        <div className="flex items-center gap-2 mb-5">
+          <div className="w-[7px] h-[7px] rounded-full bg-black" />
+          <span className="text-[11px] font-sans font-medium text-black tracking-wide">
+            Testimonials
+          </span>
         </div>
 
-        {/* Navigation Dots */}
-        <div className="flex gap-4 mt-16">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => { setActiveIndex(index); resetAutoplay(); }}
-              className="group relative py-4"
-              aria-label={`Go to testimonial ${index + 1}`}
-            >
-              <div 
-                className={`h-0.5 transition-all duration-500 bg-black ${activeIndex === index ? 'w-12' : 'w-4 opacity-20 group-hover:opacity-40'}`} 
-              />
-            </button>
-          ))}
+        {/* Centred heading */}
+        <div className="text-center">
+          <h2 className="text-[clamp(3rem,8vw,6rem)] font-sans font-black text-black tracking-[-0.03em] leading-none">
+            Experiences.
+          </h2>
+          <p className="text-[13px] font-sans text-black/50 mt-2 tracking-wide">©2025</p>
         </div>
       </div>
 
-      {/* Large background quote mark */}
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 opacity-[0.02] pointer-events-none translate-x-1/4 hidden lg:block">
-        <Quote size={600} className="text-black" strokeWidth={1} />
+      {/* ── 4-column grid — all same height ── */}
+      <div className={`relative z-10 grid grid-cols-1 md:grid-cols-4 gap-1 ${COL_H}`}>
+
+        {/* ── Col 1: Rating card ── */}
+        <div className="bg-white rounded-2xl p-6 flex flex-col justify-between h-full">
+          {/* Top: rating */}
+          <div>
+            <div className="flex items-baseline gap-1 mb-3">
+              <span className="text-[2.8rem] font-sans font-black text-black leading-none">4.9</span>
+              <span className="text-[13px] font-sans text-black/40">/5</span>
+            </div>
+            <p className="text-[12px] font-sans text-black/50 leading-[1.6]">
+              We've delivered{" "}
+              <span className="font-bold text-black">56+ projects</span>{" "}
+              that help companies generate real results.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3">
+          {/* Middle: brand + avatars */}
+          <div>
+            <p className="text-[13px] font-sans font-bold text-black mb-3">fabrica®</p>
+            <div className="flex items-center gap-2 mb-1">
+              <div className="flex -space-x-2">
+                {[11,32,47,68,15].map(id => (
+                  <img
+                    key={id}
+                    src={`https://i.pravatar.cc/28?img=${id}`}
+                    alt=""
+                    className="w-7 h-7 rounded-[6px] ring-2 ring-white object-cover"
+                  />
+                ))}
+              </div>
+              <div className="w-7 h-7 rounded-[6px] bg-black flex items-center justify-center -ml-6">
+                <span className="text-white text-[9px] font-bold">56+</span>
+              </div>
+              <div className="flex flex-col gap-1 ml-3">
+              <Stars />
+              <p className="text-[10px] font-sans text-black/40 mt-1">
+              Trusted by <span className="font-semibold text-black/60">clients worldwide</span>
+            </p>
+            </div>
+            </div>
+            
+          </div>
+
+          {/* Bottom: CTA */}
+          <button className="w-full bg-black text-white font-sans font-semibold text-[13px] py-3 rounded-full hover:bg-black/80 transition-colors">
+            Leave a review
+          </button>
+          </div>
+        </div>
+
+        {/* ── Col 2: Single card — profile top, stars, quote bottom ── */}
+        <div className="flex flex-col gap-1 h-full">
+          {/* Bottom card: profile only */}
+          <div className="bg-white rounded-2xl p-5 flex items-center gap-3">
+            <img
+              src="https://i.pravatar.cc/40?img=47"
+              alt="Emily Davis"
+              className="w-10 h-10 rounded-xl object-cover"
+            />
+            <div>
+              <p className="text-[14px] font-sans font-semibold text-black leading-tight">Emily Davis</p>
+              <p className="text-[12px] font-sans text-black/40 font-normal">StartUp Hub</p>
+            </div>
+          </div>
+          {/* Top card: quote only, stars+plus at top */}
+          <div className="bg-white rounded-2xl p-5 flex flex-col flex-1">
+            <div className="flex items-center justify-between mb-4">
+              <Stars />
+              <span className="text-black/30 text-xl font-sans font-light leading-none">+</span>
+            </div>
+            <QuoteText pushDown>A smooth process from start to finish. Highly professional team!</QuoteText>
+          </div>
+        </div>
+
+        {/* ── Col 3: Review card top + profile card bottom ── */}
+        <div className="flex flex-col gap-1 h-full">
+          {/* Top card: quote at top, stars+plus at bottom */}
+          <div className="bg-white rounded-2xl p-5 flex flex-col flex-1">
+            <QuoteText>A smooth process from start to finish. Highly professional team!</QuoteText>
+            <div className="flex items-center justify-between mt-auto pt-4">
+              <Stars />
+              <span className="text-black/30 text-xl font-sans font-light leading-none">+</span>
+            </div>
+          </div>
+
+          {/* Bottom card: profile only */}
+          <div className="bg-white rounded-2xl p-5 flex items-center gap-3">
+            <img
+              src="https://i.pravatar.cc/40?img=47"
+              alt="Emily Davis"
+              className="w-10 h-10 rounded-xl object-cover"
+            />
+            <div>
+              <p className="text-[14px] font-sans font-semibold text-black leading-tight">Emily Davis</p>
+              <p className="text-[12px] font-sans text-black/40 font-normal">StartUp Hub</p>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Col 4: Single card — profile top, stars, quote bottom ── */}
+        <div className="flex flex-col gap-1 h-full">
+          {/* Bottom card: profile only */}
+          <div className="bg-white rounded-2xl p-5 flex items-center gap-3">
+            <img
+              src="https://i.pravatar.cc/40?img=47"
+              alt="Emily Davis"
+              className="w-10 h-10 rounded-xl object-cover"
+            />
+            <div>
+              <p className="text-[14px] font-sans font-semibold text-black leading-tight">Emily Davis</p>
+              <p className="text-[12px] font-sans text-black/40 font-normal">StartUp Hub</p>
+            </div>
+          </div>
+          {/* Quote card: quote only, stars+plus at top */}
+          <div className="bg-white rounded-2xl p-5 flex flex-col flex-1">
+            <div className="flex items-center justify-between mb-4">
+              <Stars />
+              <span className="text-black/30 text-xl font-sans font-light leading-none">+</span>
+            </div>
+            <QuoteText pushDown>A smooth process from start to finish. Highly professional team!</QuoteText>
+          </div>
+        </div>
+
       </div>
     </section>
   );

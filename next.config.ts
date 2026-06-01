@@ -17,7 +17,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // @ts-expect-error - allowedDevOrigins is required for ngrok/tunnels in this Next.js version
   allowedDevOrigins: [
     "prudent-lawanna-unstunted.ngrok-free.dev",
     "*.ngrok-free.dev",

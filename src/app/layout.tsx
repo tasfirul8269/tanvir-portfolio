@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://tanvir-portfolio.com", // Replace with actual URL
+    url: "https://tanviralmas.me",
     title: "Tanvir Almas | Full Stack Web Developer & Founder",
     description: "Full Stack Web Developer, Founder of Frooxi. Specialized in Next.js, TypeScript, and modern web architectures.",
     siteName: "Tanvir Almas",

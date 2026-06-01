@@ -6,6 +6,7 @@ import { useInView } from "framer-motion";
 import Image from "next/image";
 import { portfolioData } from "@/data/portfolio";
 import { useSidebarStore } from "@/store/sidebarStore";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 interface Project {
   name: string;
@@ -13,6 +14,35 @@ interface Project {
   images: string[];
   video?: string;
 }
+
+// ---------------------------------------------------------------------------
+// ProjectVideo
+// ---------------------------------------------------------------------------
+const ProjectVideo: React.FC<{ src: string }> = ({ src }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isInView = useInView(videoRef, { amount: 0.1 });
+
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isInView) {
+        videoRef.current.play().catch(() => {});
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [isInView]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      muted
+      loop
+      playsInline
+      className="w-full h-full object-cover"
+    />
+  );
+};
 
 // ---------------------------------------------------------------------------
 // Per-column config
@@ -39,17 +69,30 @@ const COLUMN_CONFIGS: {
 const ProjectCard: React.FC<{ project: Project; aspect: string }> = ({
   project,
   aspect,
-}) => (
-  <div className={`relative w-full shrink-0 overflow-hidden rounded-lg ${aspect}`}>
-    <Image
-      src={project.images[0]}
-      alt={project.name}
-      fill
-      className="object-cover"
-      unoptimized
-    />
-  </div>
-);
+}) => {
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
+  return (
+    <div className={`relative w-full shrink-0 overflow-hidden rounded-lg ${aspect} group bg-white/5`}>
+      {!isLoaded && <Skeleton className="absolute inset-0 z-10 w-full h-full" />}
+      {project.video ? (
+        <ProjectVideo src={project.video} />
+      ) : (
+        <Image
+          src={project.images[0]}
+          alt={project.name}
+          fill
+          className={`object-cover transition-all duration-700 ${
+            isLoaded ? "opacity-100" : "opacity-0"
+          }`}
+          sizes="(max-width: 768px) 20vw, 20vw"
+          onLoad={() => setIsLoaded(true)}
+        />
+      )}
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
+    </div>
+  );
+};
 
 // ---------------------------------------------------------------------------
 // ParallaxColumn
@@ -145,11 +188,8 @@ export const FeaturedProjects4: React.FC = () => {
     >
       {/* ── Header — sits above columns, centered ── */}
       <div className="flex flex-col items-center text-center pt-10 pb-8 px-6">
-        <p className="text-[11px] uppercase tracking-[0.3em] text-white/50 font-sans mb-3">
-          10+ Projects Delivered
-        </p>
         <h2 className="text-3xl md:text-5xl font-sans font-bold leading-tight tracking-tight text-white max-w-sm">
-          Work that speaks<br />for itself.
+          Work that speaks.
         </h2>
         <p className="mt-4 text-sm text-white/50 font-sans max-w-xs leading-relaxed">
           A curated selection of projects — each built with precision,
@@ -159,8 +199,7 @@ export const FeaturedProjects4: React.FC = () => {
 
       {/* ── Columns ── */}
       <div
-        className="w-full overflow-hidden grid grid-cols-3 md:grid-cols-5 gap-[6px] px-[6px]"
-        style={{ height: "75vh" }}
+        className="w-full overflow-hidden grid grid-cols-5 gap-[6px] px-[6px] h-[50vh] md:h-[75vh]"
       >
         {columns.map((colProjects, colIndex) => {
           const { aspect, direction, speed } = COLUMN_CONFIGS[colIndex];

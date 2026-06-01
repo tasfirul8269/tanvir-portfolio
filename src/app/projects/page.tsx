@@ -20,15 +20,15 @@ const ChangingImage: React.FC<ChangingImageProps> = ({ images, alt }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const startTimeout = () => {
-    const randomTime = Math.floor(Math.random() * (4000 - 1000 + 1)) + 1000;
-    timeoutRef.current = setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-      startTimeout();
-    }, randomTime);
-  };
-
   useEffect(() => {
+    const startTimeout = () => {
+      const randomTime = Math.floor(Math.random() * (4000 - 1000 + 1)) + 1000;
+      timeoutRef.current = setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+        startTimeout();
+      }, randomTime);
+    };
+
     const initialDelay = Math.floor(Math.random() * 2000);
     const initialTimeout = setTimeout(() => { startTimeout(); }, initialDelay);
     return () => {
@@ -53,7 +53,7 @@ const ChangingImage: React.FC<ChangingImageProps> = ({ images, alt }) => {
             alt={alt}
             fill
             className="object-cover"
-            unoptimized
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </motion.div>
       </AnimatePresence>
@@ -123,7 +123,6 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ project, index, heightClass }
       <div
         className={cn(
           "relative overflow-hidden rounded-sm transition-all duration-700",
-          "grayscale-0 md:group-hover:grayscale",
           "aspect-[16/9] md:aspect-auto",
           "md:" + heightClass
         )}

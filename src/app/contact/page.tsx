@@ -100,7 +100,7 @@ function ContactForm() {
             Message sent.
           </span>
           <p className="text-black/50 font-serif text-base">
-            Thanks for reaching out — I'll get back to you shortly.
+            Thanks for reaching out — I&apos;ll get back to you shortly.
           </p>
           <button
             onClick={() => { setFormState("idle"); setFields({ name: "", email: "", message: "" }); }}
@@ -221,7 +221,7 @@ export default function ContactPage() {
         </FadeUp>
         <FadeUp delay={0.1}>
           <h1 className="text-5xl md:text-8xl font-sans font-bold tracking-tighter text-black uppercase leading-[0.9]">
-            Let's<br />Create
+            Let&apos;s<br />Create
           </h1>
         </FadeUp>
         <FadeUp delay={0.18}>

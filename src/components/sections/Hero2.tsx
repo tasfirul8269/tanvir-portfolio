@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import {
   motion,
   AnimatePresence,
@@ -65,7 +66,14 @@ function HeadlineWithGif() {
               bottom: -120,
             }}
           >
-            <img src="/images/hello.gif" alt="hello" className="h-48 md:h-96 block" />
+            <Image 
+              src="/images/hello.gif" 
+              alt="hello" 
+              width={384} 
+              height={384} 
+              className="h-48 md:h-96 w-auto block" 
+              unoptimized 
+            />
           </motion.div>
         )}
       </AnimatePresence>
@@ -116,7 +124,10 @@ export const Hero2 = () => {
 
   useEffect(() => {
     const el = document.getElementById("main-scroll-container") as HTMLElement | null;
-    setScrollContainer(el);
+    if (el) {
+      const timer = setTimeout(() => setScrollContainer(el), 0);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   // Compute scroll progress once here — shared across all ScrollBlurLayers
@@ -188,8 +199,9 @@ export const Hero2 = () => {
                 className="text-2xl md:text-4xl font-sans font-bold leading-[1.05] text-white/90 max-w-4xl cursor-pointer relative z-10"
                 style={{ willChange: "transform" }}
               >
-                I bring ideas to life through sleek, innovative design, crafting
-                experiences that go beyond visuals to captivate and engage.
+                Hi, I’m an
+                18-year-old Bangladeshi Student and Programmer.
+                I spend most of my time exploring new technologies and reading documentation about them.
               </motion.p>
             </ScrollBlurLayer>
           </div>

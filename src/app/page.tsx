@@ -53,20 +53,21 @@ export default function Home() {
       {/* Footer Section */}
       <footer id="contact" className="relative min-h-[70vh] md:min-h-screen flex items-center py-24 md:py-40 px-8 md:px-16 xl:pl-[160px] xl:pr-24 bg-black text-white font-serif">
         <div className="max-w-7xl mx-auto text-center flex flex-col items-center gap-12">
-          <h2 className="text-5xl md:text-8xl font-sans font-bold tracking-tighter uppercase">LET'S CREATE</h2>
+          <h2 className="text-5xl md:text-8xl font-sans font-bold tracking-tighter uppercase">LET&apos;S CREATE</h2>
           <p className="text-xl md:text-2xl text-white/70 max-w-2xl">
             Currently accepting new projects and collaborations. Reach out to discuss your next big idea.
           </p>
           <a
-            href="mailto:tanvir@frooxigroup.com"
+            href="mailto:tanvir.imon68@gmail.com"
             className="text-2xl md:text-4xl font-sans font-bold border-b-2 border-white/20 hover:border-white transition-colors py-2"
           >
-            tanvir@frooxigroup.com
+            tanvir.imon68@gmail.com
           </a>
           
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <a
-              href="#"
+              href="/resume.pdf"
+              download="Tanvir_Almas_Resume.pdf"
               className="flex items-center gap-2 px-8 py-4 bg-white text-black font-sans font-bold text-sm uppercase tracking-wider hover:bg-white/90 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,7 +76,9 @@ export default function Home() {
               Download My CV
             </a>
             <a
-              href="#"
+              href="https://calendly.com/tanvir-almas/30min"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 px-8 py-4 border-2 border-white text-white font-sans font-bold text-sm uppercase tracking-wider hover:bg-white hover:text-black transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +93,7 @@ export default function Home() {
               © 2024 TANVIR ALMAS. ALL RIGHTS RESERVED.
             </span>
             <div className="flex gap-8">
-              {["Twitter", "GitHub", "LinkedIn"].map((social) => (
+              {["GitHub", "LinkedIn"].map((social) => (
                 <a
                   key={social}
                   href="#"

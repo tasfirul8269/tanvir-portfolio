@@ -150,6 +150,7 @@ export default function AboutPage() {
               height={208}
               className="w-full h-full object-cover object-top"
               priority
+              placeholder="blur"
             />
           </motion.div>
         </div>
@@ -360,12 +361,12 @@ export default function AboutPage() {
         <div className="max-w-7xl">
           <FadeUp>
             <p className="text-[10px] uppercase tracking-[0.4em] font-sans font-semibold text-black/40 mb-4">
-              Let's Connect
+              Let&apos;s Connect
             </p>
           </FadeUp>
           <FadeUp delay={0.08}>
             <h2 className="text-3xl md:text-6xl font-sans font-bold tracking-tighter text-black uppercase leading-[0.9] mb-8">
-              Looking forward<br />to meeting you.
+              Looking forward<br />to working with you.
             </h2>
           </FadeUp>
           <FadeUp delay={0.16}>
@@ -374,7 +375,7 @@ export default function AboutPage() {
                 href="mailto:tanvir.imon68@gmail.com"
                 className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-sans font-bold text-xs uppercase tracking-wider hover:bg-black/80 transition-colors"
               >
-                tanvir.imon68@gmail.com
+                Email Me
               </a>
               <a
                 href="https://linkedin.com/in/tanvir-almas"

@@ -21,17 +21,18 @@ export const CanvasImage = ({ src, alt, className }: CanvasImageProps) => {
 
     const img = new Image();
     
-    img.onload = () => {
+    const handleLoad = () => {
       canvas.width = img.naturalWidth;
       canvas.height = img.naturalHeight;
       ctx.drawImage(img, 0, 0);
     };
-    
+
+    img.onload = handleLoad;
     img.src = src;
 
     // Handle cached images
     if (img.complete) {
-      img.onload(new Event('load') as any);
+      handleLoad();
     }
   }, [src]);
 

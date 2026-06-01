@@ -177,8 +177,8 @@ export const Header = () => {
 
             <div className="mt-auto pt-12 border-t border-black/5 dark:border-white/5">
               <p className="text-xs uppercase tracking-widest text-black/40 dark:text-white/40 mb-4">Get in touch</p>
-              <a href="mailto:hello@tanviralmas.com" className="text-xl font-serif underline">
-                hello@tanviralmas.com
+              <a href="mailto:tanvir.imon68@gmail.com" className="text-xl font-serif underline">
+                tanvir.imon68@gmail.com
               </a>
               <a
                 href="https://calendly.com/tanvir-almas/30min?month=2026-05"

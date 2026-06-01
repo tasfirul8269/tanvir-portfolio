@@ -24,7 +24,7 @@ export const Journey = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
-              className="group py-12 md:py-20 border-b border-black/5 flex flex-col md:flex-row gap-8 md:items-center"
+              className="group py-[10px] md:py-20 border-b border-black/5 flex flex-col md:flex-row gap-8 md:items-center"
             >
               <div className="md:w-1/4">
                 <span className="text-4xl md:text-6xl font-sans font-bold text-black/10 group-hover:text-black transition-colors duration-500">

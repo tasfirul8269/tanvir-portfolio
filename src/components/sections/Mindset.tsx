@@ -12,12 +12,12 @@ const principles = [
   {
     id: "01",
     title: "Business Impact",
-    description: "I don't just write code. I think about business impact. Every line should contribute to the bottom line.",
+    description: "Before start coding I always research about the business impact of the project. Try to make the system helpful,fast and porfitable for the business.",
   },
   {
     id: "02",
     title: "Performance",
-    description: "Performance matters. A slow website loses users. Speed is a feature, not an afterthought.",
+    description: "Performance always matters. A slow website loses users. Speed is a key feature, not an afterthought.Performance gives user a premium experience.",
   },
   {
     id: "03",
@@ -27,7 +27,7 @@ const principles = [
   {
     id: "04",
     title: "Relentless Shipping",
-    description: "I care about shipping. Ideas matter only when delivered. Done is better than perfect but never shipped.",
+    description: "I always care about shipping. Ideas matter most only when delivered. Project done is better than perfect but never shipped.",
   },
 ];
 
